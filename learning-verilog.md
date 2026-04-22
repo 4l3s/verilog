@@ -37,7 +37,8 @@ https://hdlbits.01xz.net/wiki/Module_fadd
 | 代码简洁性 | 相对冗长 | 非常简洁 |
 | 综合可控性 | 强，结果明确 | 弱，依赖综合工具 |
 | 性能潜力 | 取决于手动优化 | 可能更高（利用专用资源） |
-| 适用场景 | 教学、底层优化、门级控制 | 快速开发、高层设计、追求性能 |<websource>source_group_web_11</websource>  
+| 适用场景 | 教学、底层优化、门级控制 | 快速开发、高层设计、追求性能 |
+
 verilog的语法if标准写法
 ```verilog
     assign out_assign = (sel_b1&sel_b2)?b:a;
