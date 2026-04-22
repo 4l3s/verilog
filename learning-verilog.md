@@ -37,6 +37,35 @@ https://hdlbits.01xz.net/wiki/Module_fadd
 | 代码简洁性 | 相对冗长 | 非常简洁 |
 | 综合可控性 | 强，结果明确 | 弱，依赖综合工具 |
 | 性能潜力 | 取决于手动优化 | 可能更高（利用专用资源） |
-| 适用场景 | 教学、底层优化、门级控制 | 快速开发、高层设计、追求性能 |<websource>source_group_web_11</websource>
+| 适用场景 | 教学、底层优化、门级控制 | 快速开发、高层设计、追求性能 |<websource>source_group_web_11</websource>  
+verilog的语法if标准写法
+```verilog
+    assign out_assign = (sel_b1&sel_b2)?b:a;
+        always @(*)begin
+            if(sel_b1&sel_b2) begin
+                out_always =b;
+            end
+            else begin 
+                out_always = a;
+            end
+       end
+endmodule
+```
+如果
+```verilog
+// 初始的简化写法（正确）
+always @(*)
+    if (sel_b1 & sel_b2) 
+        out_always = b;
+    else 
+        out_always = a;
 
-
+// 后续修改（错误！）
+always @(*)
+    if (sel_b1 & sel_b2) 
+        out_always = b;
+        some_other_signal = 1; // 你以为这条语句属于 if，但实际上不属于！
+    else 
+        out_always = a;
+```
+在上面的错误示例中，some_other_signal = 1; 这条语句并不属于 if 块。无论 if 条件是否成立，它都会被执行。这会导致严重的逻辑错误。
