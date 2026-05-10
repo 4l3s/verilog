@@ -69,4 +69,20 @@ always @(*)
     else 
         out_always = a;
 ```
-在上面的错误示例中，some_other_signal = 1; 这条语句并不属于 if 块。无论 if 条件是否成立，它都会被执行。这会导致严重的逻辑错误。
+在上面的错误示例中，some_other_signal = 1; 这条语句并不属于 if 块。无论 if 条件是否成立，它都会被执行。这会导致严重的逻辑错误。  
+
+```verilog
+module top_module( 
+    input [2:0] in,
+    output [1:0] out );
+ 
+    always @(*) begin
+        out=2'd0;
+        for(integer i=0;i<3;i=i+1)begin
+            out = out +in[i];
+        end
+    end
+endmodule
+```
+有些时候integer写在always外面，最新的语法规则，写在for里面最好，将变量范围缩小在当前代码块。
+
